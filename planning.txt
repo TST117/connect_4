@@ -1,0 +1,10 @@
+1. Project - Connect 4
+
+2. Similar projects - There are youtube videos online
+
+3. Language and Tools - HTML - CSS - Javascript
+
+4. Features:
+    - Board and Pieces should look like connect 4.
+    - It should keep score and determine winner/loser/draw
+    - winner pop up screen with continue/quit button
