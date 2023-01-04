@@ -14,7 +14,24 @@ body {
 }
 
 .circle {
+    /* for the nums in the center, can prolly be removed later */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: white;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    margin: 5px;
+}
+
+#green_bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: green;
     border-radius: 50%;
     height: 80px;
     width: 80px;
