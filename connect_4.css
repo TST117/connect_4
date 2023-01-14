@@ -1,0 +1,35 @@
+.game_container {
+    width: 800px;
+    height: 700px;
+    background-color: black;
+}
+
+.col_dropper {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.col_dropper button {
+    width: 25px;
+    height: 25px;
+}
+
+.board {
+    display: grid;
+    height: 650px;
+    width: 800px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.circle {
+    display: flex;
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    align-self: center;
+    justify-self: center;
+}
