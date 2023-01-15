@@ -8,20 +8,23 @@ let board_array = [
     35, 36, 37, 38, 39, 40, 41
 ]
 
-let col_array = [35, 35, 37, 38, 39, 40, 41];
+let col_array = [35, 36, 37, 38, 39, 40, 41];
 
-col1_btn = document.querySelector("#col1");
-col1_btn.addEventListener("click", function () {
-    if (col_array[0] >= 0) {
-        drop_token(0);
-    } else {
-        console.log("No Can Do");
-    }
-});
+const col_btn = document.querySelectorAll(".drop_btn");
+
+for (let i = 0; i < col_btn.length; i++) {
+    col_btn[i].addEventListener("click", function () {
+        drop_token(i);
+    });
+}
 
 function drop_token(col) {
-    board_array[col_array[col]] = "x";
-    col_array[col] = col_array[col] - 7;
-    console.log(col_array);
-    console.log(board_array);
+    if (col_array[col] >= 0) {
+        board_array[col_array[col]] = "x";
+        col_array[col] = col_array[col] - 7;
+        console.log(col_array);
+        console.log(board_array);
+    } else {
+        col_btn[col].removeEventListener("click", drop_token);
+    }
 }
