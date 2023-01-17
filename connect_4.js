@@ -19,6 +19,7 @@ for (let i = 0; i < col_btn.length; i++) {
     col_btn[i].addEventListener("click", function () {
         drop_token(i);
         add_color();
+        check_win();
     });
 }
 
@@ -46,5 +47,25 @@ function add_color() {
         } else if (board_array[i] == "o") {
             spaces[i].style.backgroundColor = "yellow";
         }
+    }
+}
+
+function check_win() {
+    counter = 0;
+    //vertical check
+    for (i = 35; i <= 41; i++) {
+        for (j = i; j >= 0; j -= 7) {
+            if (board_array[j] == "x") {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                return;
+            }
+            console.log("inner loop ran");
+        }
+        console.log("outer loop ran");
     }
 }
