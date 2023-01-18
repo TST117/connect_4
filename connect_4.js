@@ -11,6 +11,7 @@ let board_array = [
 let col_array = [35, 36, 37, 38, 39, 40, 41];
 
 let turn = 1;
+let game_over = false;
 
 const col_btn = document.querySelectorAll(".drop_btn");
 const spaces = document.querySelectorAll(".circle");
@@ -19,7 +20,6 @@ for (let i = 0; i < col_btn.length; i++) {
     col_btn[i].addEventListener("click", function () {
         drop_token(i);
         add_color();
-        check_win();
     });
 }
 
@@ -27,14 +27,14 @@ function drop_token(col) {
     if (col_array[col] >= 0) {
         if (turn == 1) {
             board_array[col_array[col]] = "x";
+            check_win(turn);
             turn = 0;
         } else {
             board_array[col_array[col]] = "o";
+            check_win(turn);
             turn = 1;
         }
         col_array[col] = col_array[col] - 7;
-        console.log(col_array);
-        console.log(board_array);
     } else {
         col_btn[col].removeEventListener("click", drop_token);
     }
@@ -50,22 +50,26 @@ function add_color() {
     }
 }
 
-function check_win() {
+function check_win(turn) {
+    if (turn == 1) {
+        player_piece = "x";
+    } else {
+        player_piece = "o";
+    }
     counter = 0;
     //vertical check
     for (i = 35; i <= 41; i++) {
         for (j = i; j >= 0; j -= 7) {
-            if (board_array[j] == "x") {
+            if (board_array[j] == player_piece) {
                 counter++;
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log("you win!");
+                game_over = true;
                 return;
             }
-            console.log("inner loop ran");
         }
-        console.log("outer loop ran");
     }
 }
