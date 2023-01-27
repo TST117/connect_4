@@ -1,7 +1,7 @@
 //prettier-ignore
 let board_array = [
-    0, 1, 2, 3, 4, 5, 6,
-    7, 8, 9, 10, 11, 12, 13,
+    0 , 1 , 2 , 3 , 4 , 5 , 6 ,
+    7 , 8 , 9 , 10, 11, 12, 13,
     14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27,
     28, 29, 30, 31, 32, 33, 34,
@@ -57,9 +57,90 @@ function check_win(turn) {
         player_piece = "o";
     }
     counter = 0;
+
     //vertical check
-    for (i = 35; i <= 41; i++) {
-        for (j = i; j >= 0; j -= 7) {
+    for (let i = 35; i <= 41; i++) {
+        for (let j = i; j >= 0; j -= 7) {
+            if (board_array[j] == player_piece) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                game_over = true;
+                return;
+            }
+        }
+    }
+
+    //horizontal check
+    for (let i = 35; i >= 0; i -= 7) {
+        for (let j = i; j <= i + 7; j++) {
+            if (board_array[j] == player_piece) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                game_over = true;
+                return;
+            }
+        }
+    }
+
+    //diagonal 1 check
+    for (let i = 35; i >= 21; i -= 7) {
+        for (let j = i; j >= 3; j -= 6) {
+            if (board_array[j] == player_piece) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                game_over = true;
+                return;
+            }
+        }
+    }
+
+    //diagonal 2 check
+    for (let i = 6; i <= 20; i += 7) {
+        for (let j = i; j <= 38; j += 6) {
+            if (board_array[j] == player_piece) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                game_over = true;
+                return;
+            }
+        }
+    }
+
+    //diagonal 3 check
+    for (let i = 0; i <= 14; i += 7) {
+        for (let j = i; j <= 40; j += 8) {
+            if (board_array[j] == player_piece) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter == 4) {
+                console.log("you win!");
+                game_over = true;
+                return;
+            }
+        }
+    }
+
+    //diagonal 4 check
+    for (let i = 41; i >= 27; i -= 7) {
+        for (let j = i; j >= 1; j -= 8) {
             if (board_array[j] == player_piece) {
                 counter++;
             } else {
