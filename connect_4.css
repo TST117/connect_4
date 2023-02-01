@@ -33,3 +33,36 @@
     align-self: center;
     justify-self: center;
 }
+
+.red_win {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 200px;
+    width: 400px;
+
+    color: red;
+    background-color: black;
+    border: 3px solid white;
+}
+
+.yellow_win {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 200px;
+    width: 400px;
+
+    color: yellow;
+    background-color: black;
+    border: 3px solid white;
+}
+
+.disabled_btn {
+    background-color: gray;
+    border: solid lightgray 3px;
+}

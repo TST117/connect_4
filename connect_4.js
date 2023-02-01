@@ -17,10 +17,12 @@ let game_over = false;
 
 const col_btn = document.querySelectorAll(".drop_btn");
 const spaces = document.querySelectorAll(".circle");
+const body = document.querySelector("body");
 
 for (let i = 0; i < col_btn.length; i++) {
     col_btn[i].addEventListener("click", function () {
         if (col_array[i] < 0) {
+            col_btn[i].classList.add(".disabled_btn");
             col_btn[i].removeEventListener("click", drop_token);
             col_btn[i].removeEventListener("click", add_color);
             col_btn[i].removeEventListener("click", hover_effect_in);
@@ -114,6 +116,7 @@ function check_win(turn) {
                 console.log(player_piece + " wins horizontal!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -210,4 +213,20 @@ function hover_effect_in(turn, i) {
 
 function hover_effect_out(i) {
     col_btn[i].style.backgroundColor = "#f0f0f0";
+}
+
+function win_screen(player_piece) {
+    const win_div = document.createElement("div");
+    if (player_piece == "x") {
+        win_div.classList.add("red_win");
+    } else {
+        win_div.classList.add("yellow_win");
+    }
+    document.body.appendChild(win_div);
+    win_div.innerText = player_piece + " WINS!";
+
+    for (i = 0; i < col_btn.length; ++i) {
+        col_btn[i].classList.add("disabled_btn");
+        col_btn[i].disabled = true;
+    }
 }
