@@ -7,9 +7,7 @@ let board_array = [
     28, 29, 30, 31, 32, 33, 34,
     35, 36, 37, 38, 39, 40, 41
 ]
-
 let check_array = [];
-
 let col_array = [35, 36, 37, 38, 39, 40, 41];
 
 let turn = 1;
@@ -22,7 +20,6 @@ const body = document.querySelector("body");
 for (let i = 0; i < col_btn.length; i++) {
     col_btn[i].addEventListener("click", function () {
         if (col_array[i] < 0) {
-            col_btn[i].classList.add(".disabled_btn");
             col_btn[i].removeEventListener("click", drop_token);
             col_btn[i].removeEventListener("click", add_color);
             col_btn[i].removeEventListener("click", hover_effect_in);
@@ -42,7 +39,7 @@ for (let i = 0; i < col_btn.length; i++) {
     });
     col_btn[i].addEventListener("mouseout", function () {
         if (col_array[i] < 0) {
-            hover_effect_out(i);
+            col_btn[i].classList.add("disabled_btn");
             col_btn[i].removeEventListener("mouseout", hover_effect_out);
         } else {
             hover_effect_out(i);
@@ -96,6 +93,7 @@ function check_win(turn) {
                 console.log(player_piece + " wins vertical!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -137,6 +135,7 @@ function check_win(turn) {
                 console.log(player_piece + " wins diagonal 1!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -157,6 +156,7 @@ function check_win(turn) {
                 console.log(player_piece + " wins diagonal 2!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -177,6 +177,7 @@ function check_win(turn) {
                 console.log(player_piece + " wins diagonal 3!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -197,6 +198,7 @@ function check_win(turn) {
                 console.log(player_piece + "wins diagonal 4!");
                 console.log(check_array);
                 game_over = true;
+                win_screen(player_piece);
                 return;
             }
         }
@@ -205,14 +207,15 @@ function check_win(turn) {
 
 function hover_effect_in(turn, i) {
     if (turn == 1) {
-        col_btn[i].style.backgroundColor = "red";
+        col_btn[i].classList.add("red_btn");
     } else {
-        col_btn[i].style.backgroundColor = "yellow";
+        col_btn[i].classList.add("yellow_btn");
     }
 }
 
 function hover_effect_out(i) {
-    col_btn[i].style.backgroundColor = "#f0f0f0";
+    col_btn[i].classList.remove("red_btn");
+    col_btn[i].classList.remove("yellow_btn");
 }
 
 function win_screen(player_piece) {

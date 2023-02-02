@@ -13,6 +13,8 @@
 }
 
 .col_dropper button {
+    /* background-color: white;
+    border: 3px solid white; */
     width: 25px;
     height: 25px;
 }
@@ -34,7 +36,16 @@
     justify-self: center;
 }
 
+.red_btn {
+    background-color: red;
+    border: solid lightgray 3px;
+}
+
 .red_win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -48,7 +59,16 @@
     border: 3px solid white;
 }
 
+.yellow_btn {
+    background-color: yellow;
+    border: solid lightgray 3px;
+}
+
 .yellow_win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -63,6 +83,6 @@
 }
 
 .disabled_btn {
-    background-color: gray;
-    border: solid lightgray 3px;
+    background-color: black;
+    border: black;
 }
