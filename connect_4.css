@@ -1,7 +1,24 @@
+html {
+    height: 100%;
+    width: 100%;
+    background-color: lightgray;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .game_container {
     width: 800px;
     height: 700px;
-    background-color: black;
+    background-color: blue;
+    border: 3px solid black;
 }
 
 .col_dropper {
@@ -34,6 +51,13 @@
     background-color: white;
     align-self: center;
     justify-self: center;
+    border: 3px solid black;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.red_circle {
+    background-color: red;
 }
 
 .red_btn {
@@ -57,6 +81,10 @@
     color: red;
     background-color: black;
     border: 3px solid white;
+}
+
+.yellow_circle {
+    background-color: yellow;
 }
 
 .yellow_btn {
@@ -83,6 +111,6 @@
 }
 
 .disabled_btn {
-    background-color: black;
-    border: black;
+    background-color: blue;
+    border: blue;
 }

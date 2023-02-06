@@ -11,7 +11,6 @@ let check_array = [];
 let col_array = [35, 36, 37, 38, 39, 40, 41];
 
 let turn = 1;
-let game_over = false;
 
 const col_btn = document.querySelectorAll(".drop_btn");
 const spaces = document.querySelectorAll(".circle");
@@ -20,14 +19,16 @@ const body = document.querySelector("body");
 for (let i = 0; i < col_btn.length; i++) {
     col_btn[i].addEventListener("click", function () {
         if (col_array[i] < 0) {
-            col_btn[i].removeEventListener("click", drop_token);
-            col_btn[i].removeEventListener("click", add_color);
-            col_btn[i].removeEventListener("click", hover_effect_in);
+            remove_click_listeners();
         } else {
             drop_token(i);
             add_color();
-            hover_effect_in(turn, i);
-            console.log(col_array);
+            if (col_array[i] >= 0) {
+                hover_effect_in(turn, i);
+            } else {
+                col_btn[i].classList.add("disabled_btn");
+                col_btn[i].disabled = true;
+            }
         }
     });
     col_btn[i].addEventListener("mouseover", function () {
@@ -63,18 +64,23 @@ function drop_token(col) {
 function add_color() {
     for (let i = 0; i < board_array.length; i++) {
         if (board_array[i] == "x") {
-            spaces[i].style.backgroundColor = "red";
+            spaces[i].classList.add("red_circle");
         } else if (board_array[i] == "o") {
-            spaces[i].style.backgroundColor = "yellow";
+            spaces[i].classList.add("yellow_circle");
         }
     }
 }
 
 function check_win(turn) {
+    let player_piece;
+    let player_color;
+
     if (turn == 1) {
         player_piece = "x";
+        player_color = "red";
     } else {
         player_piece = "o";
+        player_color = "yellow";
     }
     counter = 0;
 
@@ -85,15 +91,12 @@ function check_win(turn) {
         for (let j = i; j >= 0; j -= 7) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + " wins vertical!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -106,15 +109,12 @@ function check_win(turn) {
         for (let j = i; j <= i + 7; j++) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + " wins horizontal!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -127,15 +127,12 @@ function check_win(turn) {
         for (let j = i; j >= 3; j -= 6) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + " wins diagonal 1!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -148,15 +145,12 @@ function check_win(turn) {
         for (let j = i; j <= 38; j += 6) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + " wins diagonal 2!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -169,15 +163,12 @@ function check_win(turn) {
         for (let j = i; j <= 40; j += 8) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + " wins diagonal 3!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -190,15 +181,12 @@ function check_win(turn) {
         for (let j = i; j >= 1; j -= 8) {
             if (board_array[j] == player_piece) {
                 counter++;
-                check_array.push(j);
             } else {
                 counter = 0;
             }
             if (counter == 4) {
                 console.log(player_piece + "wins diagonal 4!");
-                console.log(check_array);
-                game_over = true;
-                win_screen(player_piece);
+                win_screen(player_piece, player_color);
                 return;
             }
         }
@@ -207,8 +195,10 @@ function check_win(turn) {
 
 function hover_effect_in(turn, i) {
     if (turn == 1) {
+        col_btn[i].classList.remove("yellow_btn");
         col_btn[i].classList.add("red_btn");
     } else {
+        col_btn[i].classList.remove("red_btn");
         col_btn[i].classList.add("yellow_btn");
     }
 }
@@ -218,7 +208,7 @@ function hover_effect_out(i) {
     col_btn[i].classList.remove("yellow_btn");
 }
 
-function win_screen(player_piece) {
+function win_screen(player_piece, player_color) {
     const win_div = document.createElement("div");
     if (player_piece == "x") {
         win_div.classList.add("red_win");
@@ -226,10 +216,20 @@ function win_screen(player_piece) {
         win_div.classList.add("yellow_win");
     }
     document.body.appendChild(win_div);
-    win_div.innerText = player_piece + " WINS!";
+    win_div.innerText = player_color.toUpperCase() + " PLAYER WINS!";
 
+    disable_all_btns();
+}
+
+function disable_all_btns() {
     for (i = 0; i < col_btn.length; ++i) {
         col_btn[i].classList.add("disabled_btn");
         col_btn[i].disabled = true;
     }
+}
+
+function remove_click_listeners() {
+    col_btn[i].removeEventListener("click", drop_token);
+    col_btn[i].removeEventListener("click", add_color);
+    col_btn[i].removeEventListener("click", hover_effect_in);
 }
